@@ -4,7 +4,7 @@ fun main(){
 
     println("\nMOTOR ELÉCTRICO\n")
 
-    val motorElectrico: MotorElectrico = MotorElectrico(12345)
+    val motorElectrico: Motor = MotorElectrico(12345)
 
     motorElectrico.arrancar()
     println("Pulsa el botón de encender y el motor se enciende")
@@ -29,7 +29,7 @@ fun main(){
 
     println("MOTOR COMBUSTIÓN\n")
 
-    val motorCobustion: MotorCobustion = MotorCobustion(12346)
+    val motorCobustion: Motor = MotorCobustion(12346)
 
     motorCobustion.arrancar()
     println("Gira la llave y arranca")
