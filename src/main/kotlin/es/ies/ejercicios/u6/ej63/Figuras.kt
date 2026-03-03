@@ -11,7 +11,7 @@ package es.ies.ejercicios.u6.ej63
  */
 
 open class Figura(
-    val color: String,
+    var color: String,
     val etiqueta: String,
 ) {
     init {
@@ -42,7 +42,9 @@ class Rectangulo(
         println("[Rectangulo:secondary] constructor(ancho, alto)")
     }
 
-    // TODO: añade otro constructor secundario que cree un cuadrado (lado -> ancho=alto)
+    constructor(lado: Int, color: String, etiqueta: String, ancho: Int, alto: Int): this(color,etiqueta,ancho = lado,alto = lado) {
+        println("[Rectangulo:secondary] constructor(ancho = $lado, alto = $lado)")
+    }
 }
 
 class Circulo(
@@ -54,7 +56,9 @@ class Circulo(
         println("[Circulo:init] radio=$radio")
     }
 
-    // TODO: añade al menos un constructor secundario que delegue con this(...)
+    constructor(area : Double, color: String, etiqueta: String, radio: Int) : this(color, etiqueta, radio){
+        println("[Constructor secundario] $area")
+    }
 }
 
 /*
@@ -67,19 +71,21 @@ Instrucciones:
 - Descomenta el código.
 - Rellena el hueco `________` con la delegación correcta al constructor padre.
 - Sustituye los `TODO(...)` por valores/argumentos adecuados.
+*/
 
 class Triangulo : Figura {
     val base: Int
     val altura: Int
 
-    constructor(base: Int, altura: Int) : ________ {
+    constructor(color: String, etiqueta: String, base: Int, altura: Int) : super(color, etiqueta){
         println("[Triangulo:secondary] constructor(base, altura) -> constructor padre")
+        this.color = "Rojo"
         this.base = base
         this.altura = altura
     }
 
-    constructor(lado: Int) : this(base = lado, altura = lado) {
+    constructor(lado: Int, color:String, etiqueta: String, base: Int, altura: Int) : this(color, etiqueta, base, altura) {
         println("[Triangulo:secondary] constructor(lado) -> this(base, altura)")
     }
 }
-*/
+
