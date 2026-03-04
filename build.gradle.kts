@@ -19,3 +19,9 @@ application {
 tasks.dokkaHtml {
     outputDirectory.set(file("Doc"))
 }
+
+tasks.dokkaHtml {
+    dokkaSourceSets.configureEach {
+        sourceRoots.from(file("src/main/kotlin/es.ies.ejercicios.u6/ej64/ProgramaDocumentable"))
+    }
+}
