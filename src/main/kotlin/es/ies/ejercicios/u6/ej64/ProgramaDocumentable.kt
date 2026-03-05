@@ -33,7 +33,7 @@ abstract class PlantillaInforme : Resumible {
      * @return Un string con el informe
      */
     fun generar(titulo: String, items: List<Resumible>): String {
-        // Crea el StringBuilder
+
         val sb = StringBuilder()
 
         sb.appendLine(cabecera(titulo))
@@ -43,7 +43,7 @@ abstract class PlantillaInforme : Resumible {
         }
 
         sb.appendLine(pie())
-        return sb.toString() // devolver el string
+        return sb.toString()
     }
 
     /**
