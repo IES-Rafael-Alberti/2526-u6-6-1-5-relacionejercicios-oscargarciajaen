@@ -50,7 +50,6 @@ class GeneradorInformeV0 {
             FormatoInformeV0.MARKDOWN -> GenerarMarkdown(titulo, items)
             FormatoInformeV0.HTML -> GenerarHTML(titulo, items)
         }
-
 }
 
 fun main() {

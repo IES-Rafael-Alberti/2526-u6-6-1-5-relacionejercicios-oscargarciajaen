@@ -5,40 +5,47 @@ import es.ies.ejercicios.u6.ej64.Persona
 /**
  * Contrato: un repositorio que permite guardar y buscar personas.
  */
-open class RepositorioPersonasV0 {
+interface RepositorioPersonasV0Guardar {
+    fun guardar(persona: Persona)
+}
+
+interface RepositorioPersonasV0Buscar{
+    fun buscar(nombre: String): Persona?
+}
+
+class RepositorioWRV0 : RepositorioPersonasV0Guardar, RepositorioPersonasV0Buscar {
     private val map = mutableMapOf<String, Persona>()
 
-    open fun guardar(persona: Persona) {
+    override fun guardar(persona: Persona) {
         map[persona.nombre] = persona
     }
 
-    open fun buscar(nombre: String): Persona? = map[nombre]
+    override fun buscar(nombre: String) = map[nombre]
+
 }
 
-/**
- * v0 (posible violación de LSP): una subclase rompe el contrato esperado de "guardar".
- * El código cliente que acepta [RepositorioPersonasV0] puede fallar al sustituirlo por esta subclase.
- */
-class RepositorioSoloLecturaV0 : RepositorioPersonasV0() {
-    override fun guardar(persona: Persona) {
-        throw UnsupportedOperationException("Repositorio en modo solo lectura")
-    }
+class RepositorioSoloLecturaV0 : RepositorioPersonasV0Buscar {
+    private val map = mutableMapOf<String, Persona>()
+
+    override fun buscar(nombre: String) = map[nombre]
 }
 
-fun cliente(repo: RepositorioPersonasV0) {
+
+fun cliente(repo: RepositorioWRV0) {
     repo.guardar(Persona("Ana", 20))
     println("Buscar Ana -> ${repo.buscar("Ana")?.resumen()}")
 }
 
 fun main() {
     println("[LSP:v0] Repositorio normal (ok)")
-    cliente(RepositorioPersonasV0())
-
+    cliente(RepositorioWRV0())
+    /*
     println("\n[LSP:v0] Repositorio solo lectura (rompe sustitución)")
     try {
         cliente(RepositorioSoloLecturaV0())
     } catch (e: Exception) {
         println("ERROR: ${e::class.simpleName}: ${e.message}")
     }
+     */
 }
 
