@@ -7,8 +7,8 @@ package es.ies.ejercicios.u6.ej62.v0
  * (formato, cabeceras, pie, etc.) en una única clase.
  */
 class ReportGeneratorV0 {
-    fun selector(format: ReportFormatV0, title: String, lines: List<String>) {
-        when (format) {
+    fun selector(format: ReportFormatV0, title: String, lines: List<String>): Generator {
+        return when (format) {
             ReportFormatV0.CSV -> GenerateCsv(title, lines)
             ReportFormatV0.MARKDOWN -> GenerateMarkdown(title, lines)
         }
@@ -17,12 +17,12 @@ class ReportGeneratorV0 {
 
 
 abstract class Generator(title: String, lines: List<String>) {
-    abstract fun generate(title: String, lines: List<String>): String
+    abstract fun generate(): String
 }
 
-class GenerateCsv(title: String, lines: List<String>) : Generator(title, lines) {
+class GenerateCsv(private val title: String, private val lines: List<String>) : Generator(title, lines) {
 
-    override fun generate(title: String, lines: List<String>): String =
+    override fun generate(): String =
         buildString {
             appendLine("title,$title")
             appendLine("line")
@@ -31,9 +31,9 @@ class GenerateCsv(title: String, lines: List<String>) : Generator(title, lines) 
 
 }
 
-class GenerateMarkdown(title: String, lines: List<String>) : Generator(title, lines) {
+class GenerateMarkdown(private val title: String, private val lines: List<String>) : Generator(title, lines) {
 
-    override fun generate(title: String, lines: List<String>): String =
+    override fun generate(): String =
         buildString {
             appendLine("# $title")
             for (line in lines) appendLine("- $line")
