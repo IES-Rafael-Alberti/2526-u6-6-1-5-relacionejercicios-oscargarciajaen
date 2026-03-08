@@ -5,9 +5,9 @@ fun main() {
     val lines = listOf("Primera línea", "Segunda línea", "Tercera línea")
 
     println("[v0] Generando CSV...")
-    println(generator.generate(ReportFormatV0.CSV, title = "Informe", lines = lines))
+    println(generator.selector(ReportFormatV0.CSV, title = "Informe", lines = lines))
 
     println("[v0] Generando Markdown...")
-    println(generator.generate(ReportFormatV0.MARKDOWN, title = "Informe", lines = lines))
+    println(generator.selector(ReportFormatV0.MARKDOWN, title = "Informe", lines = lines))
 }
 
