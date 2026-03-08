@@ -14,32 +14,50 @@ import es.ies.ejercicios.u6.ej64.Resumible
  * - hace logs
  */
 class InformeAppServiceV0 {
-    fun ejecutar() {
+    fun creadorLista(): List<Resumible> {
         println("[SRP:v0] Preparando datos...")
         val items: List<Resumible> = listOf(
             Persona(" Ana ", 20),
             Alumno("Luis", 19, "1DAM"),
             Persona("Marta", 18),
         )
+        return items
+    }
+
+    fun registrar(items: List<Resumible>) {
 
         println("[SRP:v0] Registrando personas...")
         val registro = RegistroPersonas()
         for (item in items) {
             if (item is Persona) registro.registrar(item)
         }
+    }
 
+    fun generarInforme(items: List<Resumible>): String{
         println("[SRP:v0] Generando informe Markdown...")
         val informe = InformeMarkdown()
         val salida = informe.generar("Listado", items)
+        return salida
+    }
 
+    fun mostrarSalida(salida: String) {
         println("[SRP:v0] Resultado:")
         println(salida)
+    }
 
+    fun buscar(registro: RegistroPersonas) {
         println("[SRP:v0] Buscar 'ana' -> ${registro.buscar("ana")?.resumen()}")
+
     }
 }
 
 fun main() {
-    InformeAppServiceV0().ejecutar()
+    val items = InformeAppServiceV0().creadorLista()
+    InformeAppServiceV0().registrar(items)
+    val salida = InformeAppServiceV0().generarInforme(items)
+    InformeAppServiceV0().mostrarSalida(salida)
+    InformeAppServiceV0().buscar(registro = RegistroPersonas())
 }
+
+
 

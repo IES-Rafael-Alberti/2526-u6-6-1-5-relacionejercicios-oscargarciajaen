@@ -8,8 +8,11 @@ package es.ies.ejercicios.u6.ej63
 object Ej63
 
 fun main() {
-    println("Ejercicio 6.3 (plantilla)")
-    println("- Completa la jerarquía y los constructores en `es.ies.ejercicios.u6.ej63`")
-    println("- Añade logs en init/constructores para ver el orden de inicialización")
-    println("- Actualiza este main para instanciar usando distintos constructores")
+    val figura = Figura("Rojo", "...")
+    val figura2 = Figura("Rojo")
+    val rectangulo = Rectangulo(22,21)
+    val rectangulo2 = Rectangulo(22, "Rojo", "...", 22, 22)
+    val circulo = Circulo(22.2,"Rojo","...", 40)
+    val triangulo = Triangulo("Rojo", "...", 12, 15)
+    val triangulo2 = Triangulo(12,"Rojo", "...", 12, 15)
 }

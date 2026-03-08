@@ -2,17 +2,17 @@ package es.ies.ejercicios.u6.ej65.isp
 
 import es.ies.ejercicios.u6.ej64.Persona
 
-/**
- * v0 (viola ISP): interfaz "gorda" que fuerza a implementar métodos que algunos clientes no necesitan.
- */
-interface RepositorioPersonasCompletoV0 {
+interface RepositorioPersonasModificar {
     fun guardar(persona: Persona)
-    fun buscar(nombre: String): Persona?
     fun exportarCsv(): String
     fun borrarTodo()
 }
 
-class RepositorioMemoriaV0 : RepositorioPersonasCompletoV0 {
+interface RepositorioBuscarPersona {
+    fun buscar(nombre: String): Persona?
+}
+
+class RepositorioMemoriaV0 : RepositorioPersonasModificar, RepositorioBuscarPersona {
     private val map = mutableMapOf<String, Persona>()
 
     override fun guardar(persona: Persona) {
@@ -32,10 +32,7 @@ class RepositorioMemoriaV0 : RepositorioPersonasCompletoV0 {
     }
 }
 
-/**
- * Cliente que solo necesita buscar, pero depende de una interfaz con demasiadas cosas.
- */
-class BuscadorPersonasV0(private val repo: RepositorioPersonasCompletoV0) {
+class BuscadorPersonasV0(private val repo: RepositorioBuscarPersona) {
     fun buscar(nombre: String): Persona? = repo.buscar(nombre)
 }
 
